@@ -2,24 +2,27 @@ import getpass
 import os
 
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.prompts import ChatPromptTemplate
 
-from config import OPENAI_API_KEY
+from app_tip_cocktail.load_data import load_cocktails_data
+from app_tip_cocktail.config import OPENAI_API_KEY
 
-if not os.environ.get("OPENAI_API_KEY"):
-  os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
+def chain_main(message):
+    model = ChatOpenAI(model="gpt-4o-mini")
 
+    if not os.environ.get("OPENAI_API_KEY"):
+      os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
 
-model = ChatOpenAI(model="gpt-4o-mini")
+    system_template = "Give tips about {content}"
 
-messages = [
-    SystemMessage("Translate the following from English into Italian"),
-    HumanMessage("hi!"),
-]
+    prompt_template = ChatPromptTemplate.from_messages(
+        [("system", system_template), ("user", "{text}")]
+    )
 
+    content = load_cocktails_data()
 
-def return_answer(chat_messages):
-    return model.invoke(chat_messages).content
+    prompt = prompt_template.invoke({"content": content, "text": message})
 
+    response = model.invoke(prompt)
 
-print(return_answer(messages))
+    return response.content
