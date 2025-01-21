@@ -21,7 +21,7 @@ Cocktail Advisor Chat is a Python-based project designed to provide cocktail rec
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository_url>
+   git clone git@github.com:TarasFirst/py-cocktail.git
    cd <repository_directory>
    ```
 
@@ -46,7 +46,7 @@ Cocktail Advisor Chat is a Python-based project designed to provide cocktail rec
 
 1. **Run the application**:
    ```bash
-   uvicorn main:app_tip_cocktail --reload
+   uvicorn uvicorn app_tip_cocktail.main:app --reload
    ```
 
 2. **Access the API**:
@@ -54,15 +54,17 @@ Cocktail Advisor Chat is a Python-based project designed to provide cocktail rec
    ```
    http://127.0.0.1:8000/docs
    ```
-   Explore the available endpoints and test the application.
+
+{
+  "question": "string"
+}
+
+    Replace the "string" with your question about cocktails or ingredients.
+    You'll get the answer based on the existing data set cocktails.csv.
+
 
 ## Dataset
-The `cocktails.csv` file contains columns such as:
-- `name`: Name of the cocktail.
-- `ingredients`: List of ingredients.
-- `category`: Type or category of the cocktail.
-- `glassType`: Suggested glass for serving.
-- `alcoholic`: Indicates if the drink contains alcohol.
+The `cocktails.csv` file.
 
 ## Acknowledgments
 - [OpenAI](https://openai.com) for their powerful APIs.
