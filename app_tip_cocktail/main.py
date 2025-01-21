@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 from app_tip_cocktail.chain import chain_main
 
-
 app = FastAPI(
     title="Cocktail Advisor Chat (Fast API + NumPy + LangChain + FAISS + OpenAI + Llama Index)",
     version="0.1.0"
